@@ -1,6 +1,7 @@
 import { Schema, model} from "mongoose";
 
 const userSchema = Schema({
+
     name:{
         type: String,
         required: [true, "Name is required"],
@@ -37,8 +38,15 @@ const userSchema = Schema({
     status:{
         type: Boolean,
         default: true
-    }
-},
+    },
+
+    courses: {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    },
+    },
+
 {
     versionKey: false,
     timeStamps: true
