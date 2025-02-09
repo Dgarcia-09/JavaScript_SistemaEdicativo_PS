@@ -1,41 +1,27 @@
 import { Schema, model } from "mongoose";
 
-const courseSchema = Schema({
-
+const courseSchema = new Schema({
     name: {
         type: String,
         required: [true, "Course name is required"],
         unique: true,
-        maxLength: [25, "Name course cannot exceed 25 characters"]
-    },
-
-    teacher: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: [true, "A teacher is required"]
+        maxLength: [25, "Course name cannot exceed 25 characters"]
     },
     
-    student: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
-    ]
+    teacher: {
+        type: Schema.Types.ObjectId,
+        ref: "Teacher",
+        required: [true, "A teacher must be assigned"]
+    },
+    students: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    status: {
+        type: Boolean,
+        default: true
+    }
 }, {
     versionKey: false,
     timestamps: true
 });
-
-// Middleware para eliminar la referencia del curso en los estudiantes cuando se elimina un curso
-courseSchema.pre("findOneAndDelete", async function (next) {
-    const courseId = this.getQuery()._id;
-
-    await model("User").updateMany(
-        { courses: courseId },
-        { $pull: { courses: courseId } }
-    );
-
-    next();
-});
-
-export default model("Course", courseSchema);

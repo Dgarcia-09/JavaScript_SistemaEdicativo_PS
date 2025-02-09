@@ -9,6 +9,7 @@ import apiLimiter from "../src/middlewares/rate-limit-validator.js"
 import authRoutes from "../src/auth/auth.routes.js"
 
 
+
 const middlewares = (app) => {
     app.use(express.urlencoded({extended: false}))
     app.use(express.json())

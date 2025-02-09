@@ -1,60 +1,49 @@
-import { Schema, model} from "mongoose";
-
-const userSchema = Schema({
-
-    name:{
+import {Schema,model} from "mongoose"
+const teacherSchema = new Schema({
+    name: {
         type: String,
         required: [true, "Name is required"],
         maxLength: [25, "Name cannot exceed 25 characters"]
     },
-    surname:{
+    surname: {
         type: String,
         required: [true, "Surname is required"],
         maxLength: [25, "Surname cannot exceed 25 characters"]
     },
-
-    email:{
+    email: {
         type: String,
         required: [true, "Email is required"],
         unique: true
     },
-    password:{
+    password: {
         type: String,
         required: [true, "Password is required"]
     },
-
-    profilePicture:{
+    profilePicture: {
         type: String
     },
-
-
-    role:{
+    role: {
         type: String,
-        required: true,
-        default: "STUDENT_ROLE",
-        inmutable:true
+        default: "TEACHER_ROLE",
+        immutable: true
     },
-    
-    status:{
+    status: {
         type: Boolean,
         default: true
     },
-
     courses: [{
         type: Schema.Types.ObjectId,
-        ref: 'course',
-    },]
-    },
-
-{
+        ref: 'Course',
+    }]
+}, {
     versionKey: false,
-    timeStamps: true
-})
+    timestamps: true
+});
 
-userSchema.methods.toJSON = function(){
-    const {password, _id, ...usuario} = this.toObject()
-    usuario.uid = _id
-    return usuario
-}
+teacherSchema.methods.toJSON = function() {
+    const { password, _id, ...maestro } = this.toObject();
+    maestro.mid = _id;
+    return maestro;
+};
 
-export default model("User", userSchema)
+export default model("Teacher", teacherSchema);

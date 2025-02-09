@@ -1,21 +1,33 @@
 import {Router} from "express"
-import {login, register} from "../auth/auth.controller.js"
-import { loginValidator, registerValidator } from "../middlewares/user-validators.js"
+import {loginStudent, registerStudent, loginTeacher, registerTeacher} from "../auth/auth.controller.js"
+import { loginValidator, registerValidator, registerValidatorM } from "../middlewares/user-validators.js"
 import {uploadProfilePicture} from "../middlewares/multer-uploads.js"
 
 const router = Router()
 
 router.post(
-    "/register",
+    "/registerStudent",
     uploadProfilePicture.single("profilePicture"),
     registerValidator,
-    register
+    registerStudent
 )
 
 router.post(
-    "/login",
+    "/loginStudent",
     loginValidator,
-    login
+    loginStudent
 )
 
+router.post(
+    "/registerTeacher",
+    uploadProfilePicture.single("profilePicture"),
+    registerValidatorM,
+    registerTeacher
+);
+
+router.post(
+    "/loginTeacher",
+    loginValidator,
+    loginTeacher
+);
 export default router
