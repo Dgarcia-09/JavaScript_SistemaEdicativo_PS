@@ -25,3 +25,5 @@ const courseSchema = new Schema({
     versionKey: false,
     timestamps: true
 });
+
+export default model("Course", courseSchema)
