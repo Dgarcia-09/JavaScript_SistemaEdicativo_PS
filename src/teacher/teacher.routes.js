@@ -14,7 +14,7 @@ router.patch(
 
 )
 
-router.patch(
+router.delete(
     "/eliminarCurso/:id",
     eliminarCurso
 

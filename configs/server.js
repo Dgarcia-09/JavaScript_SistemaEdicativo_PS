@@ -8,6 +8,7 @@ import { dbConnection } from "./mongo.js"
 import apiLimiter from "../src/middlewares/rate-limit-validator.js"
 import authRoutes from "../src/auth/auth.routes.js"
 import teacherRoutes from "../src/teacher/teacher.routes.js"
+import studentRoutes from "../src/user/user.routes.js"
 
 
 
@@ -23,6 +24,7 @@ const middlewares = (app) => {
 const routes = (app) =>{
     app.use("/sistemaEducativo/v1/auth", authRoutes)
     app.use("/sistemaEducativo/v1/teacher", teacherRoutes)
+    app.use("/sistemaEducativo/v1/student", studentRoutes)
 }
 
 const conectarDB = async () =>{

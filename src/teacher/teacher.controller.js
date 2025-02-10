@@ -6,19 +6,16 @@ import Course from "../course/course.model.js";
 export const crearCurso = async (req, res) => {
     try {
         const { name, teacherId } = req.body;
-
         const teacher = await Teacher.findById(teacherId);
         if (!teacher) {
             return res.status(400).json({
                 message: "El maestro no existe"
             });
         }
-
         const curso = await Course.create({
             name,
             teacher: teacherId
         });
-
         teacher.courses.push(curso._id);
         await teacher.save();
 
@@ -43,19 +40,17 @@ export const editarCurso = async (req, res) => {
 
         const course = await Course.findById(id);
         if (!course) {
-            return res.status(400).json({ message: "Course not found" });
+            return res.status(400).json({ message: "Curso no encontrado" });
         }
-
         course.name = name || course.name;
         await course.save();
-
         return res.status(200).json({
-            message: "Course updated successfully",
+            message: "El curso ha sido actualizado exitosamente",
             course
         });
     } catch (err) {
         return res.status(500).json({
-            message: "Error updating course",
+            message: "Error al actualizar el curso",
             error: err.message
         });
     }
@@ -88,12 +83,12 @@ export const eliminarCurso = async (req, res) => {
 
 export const listarCursos = async (req, res) => {
     try {
-        const { id } = req.params;  // ID del maestro
+        const { id } = req.params; 
         const { limite = 4, desde = 0 } = req.query;
 
         const teacher = await Teacher.findById(id);
         if (!teacher) {
-            return res.status(404).json({
+            return res.status(400).json({
                 success: false,
                 message: "Maestro no encontrado"
             });
