@@ -13,14 +13,19 @@ import studentRoutes from "../src/user/user.routes.js"
 
 
 const middlewares = (app) => {
+    //Leer formularios y JSON
     app.use(express.urlencoded({extended: false}))
     app.use(express.json())
+    //Seguridad y poteccion
     app.use(cors())
     app.use(helmet())
     app.use(morgan("dev"))
     app.use(apiLimiter)
 }
 
+/*
+Rutas de mi API segun usuario
+*/
 const routes = (app) =>{
     app.use("/sistemaEducativo/v1/auth", authRoutes)
     app.use("/sistemaEducativo/v1/teacher", teacherRoutes)

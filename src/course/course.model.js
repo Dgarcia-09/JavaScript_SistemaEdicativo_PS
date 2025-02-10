@@ -8,11 +8,16 @@ const courseSchema = new Schema({
         maxLength: [25, "Course name cannot exceed 25 characters"]
     },
     
+    // Maestro que imparte el curso
+    
     teacher: {
         type: Schema.Types.ObjectId,
         ref: "Teacher",
         required: [true, "A teacher must be assigned"]
     },
+
+    // estudiantes asignados al curso
+
     students: [{
         type: Schema.Types.ObjectId,
         ref: "User"
@@ -23,6 +28,7 @@ const courseSchema = new Schema({
     }
 }, {
     versionKey: false,
+    //createdAt y updatedAt
     timestamps: true
 });
 

@@ -29,6 +29,7 @@ export const registerValidatorM = [
     body("email").notEmpty().withMessage("Ingrese su correo"),
     body("email").isEmail().withMessage("Ingrese un email valido"),
     body("password").isLength({min:8}).withMessage("La constrasena debe tener minimo 8 caracteres"),
+    // Hace la validacion para que  el campo de role sea opcional pero que solo se pueda ingresar el rol de maestro, ni yo se por que lo hice asi xd, pero ya me da pereza cambiarlo
     body("role").optional().custom((value) => {
             if (value && value !== "TEACHER_ROLE") {
                 throw new Error("Solo se permite el rol TEACHER_ROLE");
