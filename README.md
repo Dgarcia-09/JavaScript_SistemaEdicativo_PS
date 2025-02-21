@@ -6,7 +6,6 @@ Pasos para ejecutar el proyecto:
 2. Instala las dependencias usando `npm install`.
 3. Inicia el servidor usando `npm start run dev`.
    
-![df855eb919118e9c11be697778fddaf3](https://github.com/user-attachments/assets/099f43bf-488a-4737-b82d-d07382a5417c)
 
 
 
